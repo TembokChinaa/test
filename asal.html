@@ -2,121 +2,120 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Kalkulator Kompleks</title>
+  <title>Kalkulator Kompleks (HTML + CSS)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f4f8;
+      background: #e0f0ff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-    .calculator {
-      background: #ffffff;
-      padding: 20px 30px;
+
+    .kalkulator {
+      background: #fff;
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 350px;
     }
+
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #333;
+      color: #0077cc;
     }
-    input {
-      width: 80px;
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .input-complex {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    input[type="number"] {
+      width: 70px;
       padding: 8px;
-      margin: 5px;
       border-radius: 6px;
       border: 1px solid #ccc;
     }
+
     select, button {
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin: 10px 0;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
       border: none;
-      background: #007bff;
-      color: #fff;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      font-size: 16px;
       cursor: pointer;
     }
+
     .result {
-      margin-top: 15px;
+      margin-top: 20px;
+      padding: 10px;
+      background: #f0f0f0;
+      border-radius: 6px;
+      text-align: center;
       font-weight: bold;
       color: #333;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #777;
       text-align: center;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <h2>Kalkulator Bilangan Kompleks</h2>
-    
-    <div>
-      <p><strong>Bilangan Kompleks 1:</strong></p>
-      <input type="number" id="real1" placeholder="Real 1">
-      +
-      <input type="number" id="imag1" placeholder="Imajiner 1">i
+  <div class="kalkulator">
+    <h2>Kalkulator Kompleks</h2>
+
+    <div class="input-group">
+      <label>Bilangan Kompleks 1:</label>
+      <div class="input-complex">
+        <input type="number" placeholder="Real">
+        +
+        <input type="number" placeholder="Imajiner">i
+      </div>
     </div>
 
-    <div>
-      <p><strong>Bilangan Kompleks 2:</strong></p>
-      <input type="number" id="real2" placeholder="Real 2">
-      +
-      <input type="number" id="imag2" placeholder="Imajiner 2">i
+    <div class="input-group">
+      <label>Bilangan Kompleks 2:</label>
+      <div class="input-complex">
+        <input type="number" placeholder="Real">
+        +
+        <input type="number" placeholder="Imajiner">i
+      </div>
     </div>
 
-    <div>
-      <p><strong>Operasi:</strong></p>
-      <select id="operator">
-        <option value="tambah">Tambah</option>
-        <option value="kurang">Kurang</option>
-        <option value="kali">Kali</option>
-        <option value="bagi">Bagi</option>
+    <div class="input-group">
+      <label>Operasi:</label>
+      <select>
+        <option>+</option>
+        <option>-</option>
+        <option>x</option>
+        <option>/</option>
       </select>
     </div>
 
-    <button onclick="hitung()">Hitung</button>
+    <button>Hitung</button>
 
-    <div class="result" id="hasil"></div>
+    <div class="result">Hasil: -</div>
+    <div class="note">*Perhitungan dilakukan secara manual (HTML & CSS only)</div>
   </div>
-
-  <script>
-    function hitung() {
-      const r1 = parseFloat(document.getElementById('real1').value);
-      const i1 = parseFloat(document.getElementById('imag1').value);
-      const r2 = parseFloat(document.getElementById('real2').value);
-      const i2 = parseFloat(document.getElementById('imag2').value);
-      const op = document.getElementById('operator').value;
-      let real, imag;
-
-      switch(op) {
-        case "tambah":
-          real = r1 + r2;
-          imag = i1 + i2;
-          break;
-        case "kurang":
-          real = r1 - r2;
-          imag = i1 - i2;
-          break;
-        case "kali":
-          real = r1 * r2 - i1 * i2;
-          imag = r1 * i2 + i1 * r2;
-          break;
-        case "bagi":
-          const denom = r2**2 + i2**2;
-          if (denom === 0) {
-            document.getElementById("hasil").innerText = "Error: Pembagian dengan nol";
-            return;
-          }
-          real = (r1 * r2 + i1 * i2) / denom;
-          imag = (i1 * r2 - r1 * i2) / denom;
-          break;
-      }
-
-      document.getElementById("hasil").innerText = 
-        `Hasil: ${real.toFixed(2)} + ${imag.toFixed(2)}i`;
-    }
-  </script>
 </body>
 </html>
