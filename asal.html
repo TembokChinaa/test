@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Kompleks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .calculator {
+      background: #ffffff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input {
+      width: 80px;
+      padding: 8px;
+      margin: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    select, button {
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin: 10px 0;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Kalkulator Bilangan Kompleks</h2>
+    
+    <div>
+      <p><strong>Bilangan Kompleks 1:</strong></p>
+      <input type="number" id="real1" placeholder="Real 1">
+      +
+      <input type="number" id="imag1" placeholder="Imajiner 1">i
+    </div>
+
+    <div>
+      <p><strong>Bilangan Kompleks 2:</strong></p>
+      <input type="number" id="real2" placeholder="Real 2">
+      +
+      <input type="number" id="imag2" placeholder="Imajiner 2">i
+    </div>
+
+    <div>
+      <p><strong>Operasi:</strong></p>
+      <select id="operator">
+        <option value="tambah">Tambah</option>
+        <option value="kurang">Kurang</option>
+        <option value="kali">Kali</option>
+        <option value="bagi">Bagi</option>
+      </select>
+    </div>
+
+    <button onclick="hitung()">Hitung</button>
+
+    <div class="result" id="hasil"></div>
+  </div>
+
+  <script>
+    function hitung() {
+      const r1 = parseFloat(document.getElementById('real1').value);
+      const i1 = parseFloat(document.getElementById('imag1').value);
+      const r2 = parseFloat(document.getElementById('real2').value);
+      const i2 = parseFloat(document.getElementById('imag2').value);
+      const op = document.getElementById('operator').value;
+      let real, imag;
+
+      switch(op) {
+        case "tambah":
+          real = r1 + r2;
+          imag = i1 + i2;
+          break;
+        case "kurang":
+          real = r1 - r2;
+          imag = i1 - i2;
+          break;
+        case "kali":
+          real = r1 * r2 - i1 * i2;
+          imag = r1 * i2 + i1 * r2;
+          break;
+        case "bagi":
+          const denom = r2**2 + i2**2;
+          if (denom === 0) {
+            document.getElementById("hasil").innerText = "Error: Pembagian dengan nol";
+            return;
+          }
+          real = (r1 * r2 + i1 * i2) / denom;
+          imag = (i1 * r2 - r1 * i2) / denom;
+          break;
+      }
+
+      document.getElementById("hasil").innerText = 
+        `Hasil: ${real.toFixed(2)} + ${imag.toFixed(2)}i`;
+    }
+  </script>
+</body>
+</html>
